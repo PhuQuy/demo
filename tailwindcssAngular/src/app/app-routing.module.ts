@@ -15,6 +15,10 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'test',
+    loadChildren: () => import('@pages/test/test.module').then(mod => mod.TestModule)
+  },
+  {
     path: '**',
     redirectTo: '/'
   }
