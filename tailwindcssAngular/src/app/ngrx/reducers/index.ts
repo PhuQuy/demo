@@ -1,11 +1,8 @@
+import { environment } from '@env/environment';
 import {
   ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer
+  ActionReducerMap, MetaReducer
 } from '@ngrx/store';
-import { environment } from '@env/environment';
 import { counterReducer } from './counter.reducer';
 
 export interface State {
@@ -13,10 +10,17 @@ export interface State {
 }
 
 export const reducers: ActionReducerMap<State> = {
-
+  count: counterReducer
 };
 
+export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
+  return function (state, action) {
+    console.log('state', state);
+    console.log('action', action);
 
-// export const metaReducers: MetaReducer<any>[] = !environment.production ? [counterReducer] : [counterReducer];
-// export const counterReducer: MetaReducer<State>[] = !environment.production ? [] : [];
+    return reducer(state, action);
+  };
+}
+
+export const metaReducers: MetaReducer<any>[] = !environment.production ? [debug] : [];
 

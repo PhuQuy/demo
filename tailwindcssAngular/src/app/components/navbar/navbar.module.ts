@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { LoginModule } from '@modals/login/login.module';
 import { NavbarComponent } from './navbar.component';
 
 
@@ -9,7 +10,8 @@ import { NavbarComponent } from './navbar.component';
     NavbarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    LoginModule
   ],
   exports: [NavbarComponent]
 })

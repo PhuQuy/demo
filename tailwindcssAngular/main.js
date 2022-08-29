@@ -1,39 +1,52 @@
-const {app, BrowserWindow} = require('electron')
-    const url = require("url");
-    const path = require("path");
+const { app, BrowserWindow } = require('electron')
+const url = require("url");
+const path = require("path");
 
-    let mainWindow
+let mainWindow
 
-    function createWindow () {
-      mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+function createWindow() {
+    mainWindow = new BrowserWindow({
         webPreferences: {
-          nodeIntegration: true
-        }
-      })
+            nodeIntegration: true
+        },
+        show: false
+    });
 
-      mainWindow.loadURL(
-        url.format({
-          pathname: path.join(__dirname, `/dist/tailwindcssAngular/browser/index.html`),
-          protocol: "file:",
-          slashes: true
-        })
-      );
-      // Open the DevTools.
-      mainWindow.webContents.openDevTools()
+    mainWindow.maximize();
 
-      mainWindow.on('closed', function () {
+    // mainWindow.loadURL(
+    //     // url.format({
+    //     //   pathname: path.join(__dirname, `/dist/tailwindcssAngular/browser/index.html`),
+    //     //   protocol: "file:",
+    //     //   slashes: true
+    //     // })
+    //     'http://localhost:4000/'
+    // );
+
+
+    mainWindow.loadURL('http://localhost:4000/');
+    // mainWindow.loadFile(path.join(__dirname, `/dist/tailwindcssAngular/browser/index.html`));
+    // mainWindow.loadFile(`dist/tailwindcssAngular/browser/index.html`);
+
+    // Open the DevTools.
+    //   mainWindow.webContents.openDevTools()
+
+    mainWindow.on('closed', function () {
         mainWindow = null
-      })
-    }
-
-    app.on('ready', createWindow)
-
-    app.on('window-all-closed', function () {
-      if (process.platform !== 'darwin') app.quit()
     })
 
-    app.on('activate', function () {
-      if (mainWindow === null) createWindow()
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
     })
+}
+
+app.on('ready', createWindow)
+
+app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') app.quit()
+})
+
+app.on('activate', function () {
+    if (mainWindow === null) createWindow()
+})
+

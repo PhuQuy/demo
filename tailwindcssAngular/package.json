@@ -14,7 +14,10 @@
     "build:ssr": "npm run build:prod && ng run tailwindcssAngular:server",
     "build:docker": "docker build --no-cache -t phuquy/tailwind .",
     "prerender": "ng run tailwindcssAngular:prerender",
-    "start:electron": "set NODE_ENV=production && ng build --configuration production --base-href ./ && electron ."
+    "electron": "electron .",
+    "serve:electron": "set NODE_ENV=production && ng build --configuration production --base-href ./ && electron .",
+    "build:window": "set NODE_ENV=production && ng build --configuration production --base-href ./ && electron-packager . --platform=win32 --no-prune --ignore=/node_modules --ignore=/e2e --ignore=/src",
+    "build:mac": "set NODE_ENV=production && ng build --configuration production --base-href ./ && electron-packager . --platform=darwin --no-prune --ignore=/node_modules --ignore=/e2e --ignore=/src"
   },
   "private": true,
   "dependencies": {
@@ -47,10 +50,12 @@
     "@types/compression": "^1.7.2",
     "@types/express": "^4.17.0",
     "@types/jasmine": "~4.0.0",
+    "@ngrx/store-devtools": "^14.0.2",
     "@types/memory-cache": "^0.2.2",
     "@types/node": "^14.15.0",
     "autoprefixer": "^10.4.7",
     "electron": "^19.0.8",
+    "electron-packager": "^15.5.1",
     "jasmine-core": "~4.1.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
