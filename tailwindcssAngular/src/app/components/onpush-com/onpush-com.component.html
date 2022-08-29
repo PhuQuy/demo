@@ -1,0 +1,9 @@
+<form>
+    <div>
+        <input type="text" [(ngModel)]="profile.first">
+    </div>
+
+    <div>
+        {{profile.lastChanged() | date: 'medium'}}
+    </div>
+</form>
